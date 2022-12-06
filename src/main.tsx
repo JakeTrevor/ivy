@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Axis from "./lib/Chart/Axis";
 import Chart from "./lib/Chart/Chart";
 import Line from "./lib/Chart/Line";
 import Scale from "./lib/Chart/Scale";
@@ -22,11 +23,11 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <div>
       <h1>Example:</h1>
-      <Chart width={200} height={100}>
-        <Scale direction="h" auto="lin" />
-        <Scale direction="v" auto="lin" />
+      <Chart width={400} height={200} axisSize={30}>
+        <Axis direction="h" auto="lin" tag="hoz" />
+        <Axis direction="v" auto="lin" tag="Vert" />
         <Line points={data} series="data" />
         <Line points={data2Boogaloo} series="data 2 boogaloo" />
       </Chart>

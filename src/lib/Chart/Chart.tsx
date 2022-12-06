@@ -1,29 +1,19 @@
-import { createContext, FC, useState } from "react";
+import { FC, useState } from "react";
 import Plot, { PlotProps } from "../common/Plot";
+import { chartContext } from "./chartContext";
 
-interface ctx {
-  dimensions: [number, number];
-  axes: ChartAxes;
-  data: Data;
-  register: {
-    axis: (id: string, scale: Scale) => void;
-    dataset: (id: string, data: Dataset) => void;
-  };
+interface props extends PlotProps {
+  axisSize?: number;
+  chartArea?: Point;
 }
 
-export let chartContext = createContext<ctx>({
-  dimensions: [0, 0],
-  axes: {},
-  register: {
-    axis: (id: string, scale: Scale) => id,
-    dataset: (id: string, data: Dataset) => id,
-  },
-  data: {},
-});
-
-interface props extends PlotProps {}
-
-let Chart: FC<props> = ({ width, height, ...rest }) => {
+let Chart: FC<props> = ({
+  axisSize = 10,
+  chartArea,
+  width,
+  height,
+  ...rest
+}) => {
   let [axes, setAxes] = useState<ChartAxes>({
     x: (n: number) => n,
     y: (n: number) => n,
@@ -50,9 +40,15 @@ let Chart: FC<props> = ({ width, height, ...rest }) => {
     },
   };
 
+  if (!chartArea) {
+    chartArea = chartArea || [0, 0];
+    chartArea[0] = width - axisSize;
+    chartArea[1] = height - axisSize;
+  }
+
   return (
     <chartContext.Provider
-      value={{ dimensions: [width, height], axes, data, register }}
+      value={{ dimensions: [width, height], chartArea, axes, data, register }}
     >
       <Plot {...rest} width={width} height={height} />
     </chartContext.Provider>

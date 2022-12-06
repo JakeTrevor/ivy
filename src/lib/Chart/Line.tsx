@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { chartContext as ctx } from "./Chart";
+import { chartContext as ctx } from "./chartContext";
 
 // unfortunate ts voodoo
 interface lineProps extends Omit<React.SVGProps<SVGPolylineElement>, "points"> {
@@ -19,7 +19,7 @@ let Line: FC<lineProps> = ({
   ...rest
 }) => {
   let chartContext = useContext(ctx);
-  let { axes, register } = chartContext;
+  let { axes, register, dimensions, chartArea } = chartContext;
 
   useEffect(() => {
     if (!series) {
@@ -36,8 +36,13 @@ let Line: FC<lineProps> = ({
   let scaleX = axes[x];
   let scaleY = axes[y];
 
+  let baseline = `translate(${dimensions[0] - chartArea[0]} ${
+    dimensions[1] - chartArea[1]
+  })`;
+
   return (
     <polyline
+      transform={baseline}
       points={points.map((p) => [scaleX(p[0]), scaleY(p[1])]).join(" ")}
       {...rest}
       fill={fill}

@@ -1,44 +1,43 @@
-import { FC, useContext, useEffect, useState } from "react";
-import { chartContext as ctx } from "./Chart";
-import { makeLin } from "../common/scaleFactories";
+import { chartContext as ctx } from "./chartContext";
+import { FC, useContext, useEffect } from "react";
+import { makeLin, makeLog } from "../common/scaleFactories";
+import { getDataset } from "../common/getDataset";
 
-interface props {
+export interface ScaleProps {
   direction: "h" | "v";
   id?: string;
   scale?: { (n: number): number };
-  ticks?: string[] | "none" | "auto";
-  numTicks?: number;
-  makeTick?: (n: number) => string;
   auto?: "lin" | "log";
+  tag: string;
 }
 
-let Scale: FC<props> = ({ direction, id = "", scale = (n) => n, auto }) => {
+let Scale: FC<ScaleProps> = ({
+  direction,
+  id = "",
+  scale = (n) => n,
+  auto,
+  tag,
+}) => {
   id = id || direction === "h" ? "x" : "y";
 
-  let { dimensions, data, register } = useContext(ctx);
+  let { chartArea, data, register } = useContext(ctx);
 
   useEffect(() => {
+    console.log("scale:", tag, id, direction, auto);
     if (auto) {
-      let dataset = Object.values(data)
-        .filter((e) => e.axes.includes(id))
-        .flatMap((e) => {
-          if (!Array.isArray(e.data[0])) return e.data as number[];
+      let dataset = getDataset(data, id, direction);
 
-          let arr = e.data as Point[];
-
-          let get = direction === "h" ? (a: Point) => a[0] : (a: Point) => a[1];
-          return arr.map(get);
-        });
-
-      let size = direction === "h" ? dimensions[0] : dimensions[1];
-      let scaleFactory = auto === "lin" ? makeLin : makeLin; //replace this with log scale
-      scale = scaleFactory(dataset, size);
+      let size = direction === "h" ? chartArea[0] : chartArea[1];
+      let scaleFactory = auto === "lin" ? makeLin : makeLog; //replace this with log scale
+      console.log("label: ", id);
+      scale = scaleFactory(dataset, size, 10, true);
+      console.log(scale);
     }
 
     register["axis"](id, scale);
   }, [data]);
 
-  return <></>;
+  return <>scale {id}</>;
 };
 
 export default Scale;
