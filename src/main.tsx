@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Axis from "./lib/Axis";
-import Chart from "./lib/Chart";
-import Line from "./lib/Line";
+import Chart from "./lib/Chart/Chart";
+import Line from "./lib/Chart/Line";
+import Scale from "./lib/Chart/Scale";
 
 function App() {
   let data: Point[] = [
@@ -25,10 +25,10 @@ function App() {
     <div className="App">
       <h1>Example:</h1>
       <Chart width={200} height={100}>
-        <Axis direction="h" auto="lin" />
-        <Axis direction="v" auto="lin" />
-        <Line points={data} />
-        <Line points={data2Boogaloo} />
+        <Scale direction="h" auto="lin" />
+        <Scale direction="v" auto="lin" />
+        <Line points={data} series="data" />
+        <Line points={data2Boogaloo} series="data 2 boogaloo" />
       </Chart>
     </div>
   );
