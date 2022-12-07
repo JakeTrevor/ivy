@@ -34,8 +34,8 @@ let Line: FC<lineProps> = ({
     register["dataset"](series, { axes: [x, y], data: points });
   }, []);
 
-  let scaleX = axes[x] || identity;
-  let scaleY = axes[y] || identity;
+  let scaleX = axes[x] ? axes[x][0] : identity;
+  let scaleY = axes[y] ? axes[y][0] : identity;
 
   let baseline = `translate(${dimensions[0] - chartArea[0]} 0)`;
 

@@ -2,11 +2,13 @@ import { chartContext as ctx } from "./chartContext";
 import { FC, useContext, useEffect } from "react";
 import { makeLin, makeLog } from "../common/scaleFactories";
 import { getDataset } from "../common/getDataset";
+import identity from "../common/identity";
 
 export interface ScaleProps {
   direction: "h" | "v";
   id?: string;
   scale?: { (n: number): number };
+  inverse?: { (n: number): number };
   auto?: "lin" | "log";
   tag: string;
 }
@@ -14,7 +16,8 @@ export interface ScaleProps {
 let Scale: FC<ScaleProps> = ({
   direction,
   id = "",
-  scale = (n) => n,
+  scale = identity,
+  inverse = identity,
   auto,
   tag,
 }) => {
@@ -29,11 +32,11 @@ let Scale: FC<ScaleProps> = ({
       let size = direction === "h" ? chartArea[0] : chartArea[1];
       let scaleFactory = auto === "lin" ? makeLin : makeLog; //replace this with log scale
       let reverse = direction === "v";
-      scale = scaleFactory(dataset, size, reverse);
+      [scale, inverse] = scaleFactory(dataset, size, reverse);
     }
     console.log(id, scale);
 
-    register["axis"](id, scale);
+    register["axis"](id, [scale, inverse]);
   }, [data]);
 
   return <>scale {id}</>;

@@ -8,7 +8,7 @@ interface Dataset {
 }
 
 interface ChartAxes {
-  [label: string]: Scale;
+  [label: string]: [Scale, Scale];
 }
 
 interface Data {

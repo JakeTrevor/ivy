@@ -19,7 +19,7 @@ let Chart: FC<props> = ({
   let [data, setData] = useState<Data>({});
 
   let register = {
-    axis: (id: string, scale: Scale) => {
+    axis: (id: string, scale: [Scale, Scale]) => {
       setAxes((old) => {
         return {
           ...old,

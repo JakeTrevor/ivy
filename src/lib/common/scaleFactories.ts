@@ -1,12 +1,14 @@
+import identity from "./identity";
+
 export function makeLin(
   data: number[],
   axisSize: number,
   reverse = false,
   paddingPercent = 10,
   debug = false
-): Scale {
+): [Scale, Scale] {
   if (data.length === 0) {
-    return (n) => n;
+    return [identity, identity];
   }
 
   let max = Math.max(...data);
@@ -16,7 +18,6 @@ export function makeLin(
   let extra = range * (paddingPercent / 100);
 
   let bottom = min - extra;
-
   let top = max + extra;
 
   if (reverse) {
@@ -26,40 +27,46 @@ export function makeLin(
   let m = 1 / (top - bottom);
   let c = -m * bottom;
   let scale: Scale = (x) => axisSize * (m * x + c);
+  let inverse: Scale = (y) => (y / axisSize - c) / m;
 
   if (debug) {
     console.info(
       `scale for:`,
       data,
       `range: ${range}, top: ${top}, bottom: ${bottom}`,
+      `reverse: ${reverse}`,
       `y= ${m}*x + ${c}`,
       `data to:`,
       data.map((e) => scale(e))
     );
   }
 
-  return scale;
+  return [scale, inverse];
 }
 
 //an example:
 let data = [10, 20, 30, 40, 50];
-let s = makeLin(data, 10);
+let [scale, inverse] = makeLin(data, 10);
 // the factory will place from 6 to 54 on the axis
-// 6 will be at coord 0 i.e. s(6) =0
-// 54 will be at coord 10 i.e. s(54) =10
+// 6 will be at coord 0 i.e. scale(6) =0
+// 54 will be at coord 10 i.e. scale(54) =10
 // because: range = 50-10=40
 // padding on either side = range * 10% = 40/10
 // so if you plotted the actual data on a graph,
 // there would be a comfy margin of 10% above and below the actual line.
 
+// the reverse flag is necessary as SVG coordinates have down = increasing y
+// so for a normal graph with 0,0 in the bottom left, you want the lowest data value to have the highest y coordinate.
+
 export function makeLog(
   data: number[],
   axisSize: number,
   reverse = false,
-  paddingPercent = 10
-): Scale {
+  paddingPercent = 10,
+  debug = false
+): [Scale, Scale] {
   if (data.length === 0) {
-    return (n) => n;
+    return [identity, identity];
   }
 
   let max = Math.max(...data);
@@ -69,12 +76,29 @@ export function makeLog(
   let extra = range * (paddingPercent / 100);
 
   let bottom = min - extra;
-
   let top = max + extra;
+
+  if (reverse) {
+    [top, bottom] = [bottom, top];
+  }
 
   let m = 1 / Math.log(top - bottom);
   let c = -m * Math.log(bottom);
 
-  let scale: Scale = (x) => axisSize * (m * Math.log(x) + c);
-  return scale;
+  let scale: Scale = (x) => axisSize * (m * Math.log10(x) + c);
+  let inverse: Scale = (y) => 10 ^ ((y / axisSize - c) / m);
+
+  if (debug) {
+    console.info(
+      `scale for:`,
+      data,
+      `range: ${range}, top: ${top}, bottom: ${bottom}`,
+      `reverse: ${reverse}`,
+      `y= ${m}*log x + ${c}`,
+      `data to:`,
+      data.map((e) => scale(e))
+    );
+  }
+
+  return [scale, inverse];
 }

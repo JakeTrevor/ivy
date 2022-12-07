@@ -6,7 +6,7 @@ interface ctx {
   axes: ChartAxes;
   data: Data;
   register: {
-    axis: (id: string, scale: Scale) => void;
+    axis: (id: string, scale: [Scale, Scale]) => void;
     dataset: (id: string, data: Dataset) => void;
   };
 }
@@ -16,7 +16,7 @@ export let chartContext = createContext<ctx>({
   chartArea: [0, 0],
   axes: {},
   register: {
-    axis: (id: string, scale: Scale) => id,
+    axis: (id: string, scale: [Scale, Scale]) => id,
     dataset: (id: string, data: Dataset) => id,
   },
   data: {},
