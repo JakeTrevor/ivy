@@ -5,30 +5,18 @@ import Chart from "./lib/Chart/Chart";
 import Line from "./lib/Chart/Line";
 
 function App() {
-  let data: Point[] = [
-    [1, 2],
-    [2, 12],
-    [3, 5],
-    [4, 3],
-    [5, 2],
-  ];
+  let quadratic: Point[] = [...Array(20).keys()].map((e, i) => [i, i ** 2]);
 
-  let data2Boogaloo: Point[] = [
-    [1, 3],
-    [2, 4],
-    [3, 5],
-    [4, 1],
-    [5, 4],
-  ];
+  let linear: Point[] = [...Array(20).keys()].map((e, i) => [i, i * 2]);
 
   return (
     <div>
       <h1>Example:</h1>
       <Chart width={400} height={200} axisSize={30}>
-        <Axis direction="h" auto="lin" tag="hoz" />
-        <Axis direction="v" auto="lin" tag="Vert" />
-        <Line points={data} series="data" />
-        <Line stroke="red" points={data2Boogaloo} series="data 2 boogaloo" />
+        <Axis direction="h" auto="lin" title=" " tickStep={2} />
+        <Axis direction="v" auto="lin" title=" " tickStep={40} gridLines />
+        <Line points={quadratic} series="quadratic" />
+        <Line points={linear} series="linear" stroke="blue" />
       </Chart>
     </div>
   );

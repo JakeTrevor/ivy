@@ -10,7 +10,6 @@ export interface ScaleProps {
   scale?: { (n: number): number };
   inverse?: { (n: number): number };
   auto?: "lin" | "log";
-  tag: string;
 }
 
 let Scale: FC<ScaleProps> = ({
@@ -19,7 +18,6 @@ let Scale: FC<ScaleProps> = ({
   scale = identity,
   inverse = identity,
   auto,
-  tag,
 }) => {
   let { chartArea, data, register } = useContext(ctx);
   if (id === "") {

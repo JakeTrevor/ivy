@@ -14,3 +14,13 @@ interface ChartAxes {
 interface Data {
   [id: string]: Dataset;
 }
+
+interface ScaleLabel {
+  x: number;
+  y: number;
+  text: string;
+  transform?: string;
+  "transform-origin": string;
+  "text-anchor": "start" | "end";
+}
+[];
