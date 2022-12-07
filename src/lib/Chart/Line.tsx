@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
+import identity from "../common/identity";
 import { chartContext as ctx } from "./chartContext";
 
 // unfortunate ts voodoo
@@ -33,12 +34,10 @@ let Line: FC<lineProps> = ({
     register["dataset"](series, { axes: [x, y], data: points });
   }, []);
 
-  let scaleX = axes[x];
-  let scaleY = axes[y];
+  let scaleX = axes[x] || identity;
+  let scaleY = axes[y] || identity;
 
-  let baseline = `translate(${dimensions[0] - chartArea[0]} ${
-    dimensions[1] - chartArea[1]
-  })`;
+  let baseline = `translate(${dimensions[0] - chartArea[0]} 0)`;
 
   return (
     <polyline

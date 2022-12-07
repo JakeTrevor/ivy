@@ -14,10 +14,7 @@ let Chart: FC<props> = ({
   height,
   ...rest
 }) => {
-  let [axes, setAxes] = useState<ChartAxes>({
-    x: (n: number) => n,
-    y: (n: number) => n,
-  });
+  let [axes, setAxes] = useState<ChartAxes>({});
 
   let [data, setData] = useState<Data>({});
 

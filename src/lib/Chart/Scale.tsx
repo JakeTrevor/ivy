@@ -18,21 +18,20 @@ let Scale: FC<ScaleProps> = ({
   auto,
   tag,
 }) => {
-  id = id || direction === "h" ? "x" : "y";
-
   let { chartArea, data, register } = useContext(ctx);
-
+  if (id === "") {
+    id = direction === "h" ? "x" : "y";
+  }
   useEffect(() => {
-    console.log("scale:", tag, id, direction, auto);
     if (auto) {
       let dataset = getDataset(data, id, direction);
 
       let size = direction === "h" ? chartArea[0] : chartArea[1];
       let scaleFactory = auto === "lin" ? makeLin : makeLog; //replace this with log scale
-      console.log("label: ", id);
-      scale = scaleFactory(dataset, size, 10, true);
-      console.log(scale);
+      let reverse = direction === "v";
+      scale = scaleFactory(dataset, size, reverse);
     }
+    console.log(id, scale);
 
     register["axis"](id, scale);
   }, [data]);

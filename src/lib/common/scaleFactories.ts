@@ -1,6 +1,7 @@
 export function makeLin(
   data: number[],
   axisSize: number,
+  reverse = false,
   paddingPercent = 10,
   debug = false
 ): Scale {
@@ -17,6 +18,10 @@ export function makeLin(
   let bottom = min - extra;
 
   let top = max + extra;
+
+  if (reverse) {
+    [top, bottom] = [bottom, top];
+  }
 
   let m = 1 / (top - bottom);
   let c = -m * bottom;
@@ -50,6 +55,7 @@ let s = makeLin(data, 10);
 export function makeLog(
   data: number[],
   axisSize: number,
+  reverse = false,
   paddingPercent = 10
 ): Scale {
   if (data.length === 0) {

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import Axis from "./lib/Chart/Axis";
 import Chart from "./lib/Chart/Chart";
 import Line from "./lib/Chart/Line";
-import Scale from "./lib/Chart/Scale";
 
 function App() {
   let data: Point[] = [
@@ -29,7 +28,7 @@ function App() {
         <Axis direction="h" auto="lin" tag="hoz" />
         <Axis direction="v" auto="lin" tag="Vert" />
         <Line points={data} series="data" />
-        <Line points={data2Boogaloo} series="data 2 boogaloo" />
+        <Line stroke="red" points={data2Boogaloo} series="data 2 boogaloo" />
       </Chart>
     </div>
   );
