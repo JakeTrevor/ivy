@@ -8,7 +8,6 @@ export interface ScaleProps {
   direction: "h" | "v";
   id?: string;
   scale?: { (n: number): number };
-  inverse?: { (n: number): number };
   auto?: "lin" | "log";
 }
 
@@ -16,7 +15,6 @@ let Scale: FC<ScaleProps> = ({
   direction,
   id = "",
   scale = identity,
-  inverse = identity,
   auto,
 }) => {
   let { chartArea, data, register } = useContext(ctx);
@@ -30,11 +28,11 @@ let Scale: FC<ScaleProps> = ({
       let size = direction === "h" ? chartArea[0] : chartArea[1];
       let scaleFactory = auto === "lin" ? makeLin : makeLog; //replace this with log scale
       let reverse = direction === "v";
-      [scale, inverse] = scaleFactory(dataset, size, reverse);
+      [scale] = scaleFactory(dataset, size, reverse);
     }
     console.log(id, scale);
 
-    register["axis"](id, [scale, inverse]);
+    register.scale(id, scale);
   }, [data]);
 
   return <>scale {id}</>;

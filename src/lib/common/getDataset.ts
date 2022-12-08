@@ -1,4 +1,8 @@
-export function getDataset(data: Data, id: string, direction: string) {
+export function getDataset(
+  data: { [id: string]: Dataset },
+  id: string,
+  direction: string
+) {
   return Object.values(data)
     .filter((e) => e.axes.includes(id))
     .flatMap((e) => {

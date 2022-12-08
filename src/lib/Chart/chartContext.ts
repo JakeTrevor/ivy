@@ -1,22 +1,22 @@
 import { createContext } from "react";
 
-interface ctx {
+interface context {
   dimensions: [number, number];
   chartArea: [number, number];
-  axes: ChartAxes;
-  data: Data;
+  scales: { [id: string]: Scale };
+  data: { [id: string]: Dataset };
   register: {
-    axis: (id: string, scale: [Scale, Scale]) => void;
+    scale: (id: string, scale: Scale) => void;
     dataset: (id: string, data: Dataset) => void;
   };
 }
 
-export let chartContext = createContext<ctx>({
+export let chartContext = createContext<context>({
   dimensions: [0, 0],
   chartArea: [0, 0],
-  axes: {},
+  scales: {},
   register: {
-    axis: (id: string, scale: [Scale, Scale]) => id,
+    scale: (id: string, scale: Scale) => id,
     dataset: (id: string, data: Dataset) => id,
   },
   data: {},

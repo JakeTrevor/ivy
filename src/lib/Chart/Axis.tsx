@@ -1,21 +1,23 @@
-import { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { getDataset } from "../common/getDataset";
 import identity from "../common/identity";
+import pick from "../common/pick";
 import { chartContext as ctx } from "./chartContext";
 import Scale, { ScaleProps } from "./Scale";
 
-interface props extends ScaleProps {
-  gridLines?: boolean;
-  title?: string;
-  makeLabel?: (e: number, i: number) => string;
-  tickStep?: number;
-}
+type props = ScaleProps &
+  AxisElementProps & {
+    gridlines?: boolean;
+    title?: string;
+    makeLabel?: (e: number, i: number) => string;
+    tickStep?: number;
+  };
 
 let Axis: FC<props> = ({
   direction,
-  title = "",
+  title,
   id = "",
-  gridLines = false,
+  gridlines = false,
   makeLabel = (n) => n.toString(),
   tickStep = 1,
   ...rest
@@ -24,11 +26,11 @@ let Axis: FC<props> = ({
     id = direction === "h" ? "x" : "y";
   }
 
-  if (title === "") {
+  if (title === undefined) {
     title = id;
   }
 
-  let { chartArea, dimensions, axes, data } = useContext(ctx);
+  let { chartArea, dimensions, scales, data } = useContext(ctx);
 
   let margins = [dimensions[0] - chartArea[0], dimensions[1] - chartArea[1]];
 
@@ -54,8 +56,7 @@ let Axis: FC<props> = ({
           y: chartArea[1] / 2,
         };
 
-  let s = axes[id] || [identity, identity];
-  let [scale, inverse] = s;
+  let scale = scales[id] || identity;
   let [ticks, setTicks] = useState<ScaleLabel[]>([]);
 
   useEffect(() => {
@@ -76,13 +77,11 @@ let Axis: FC<props> = ({
       if (direction === "h") {
         let x = margins[1] + scale(data);
         let y = chartArea[1];
-        let transform = "rotate(90)";
         let origin = `${x} ${y}`;
         return {
           x,
           y,
           text,
-          transform,
           "transform-origin": origin,
           "text-anchor": "start",
         };
@@ -103,18 +102,23 @@ let Axis: FC<props> = ({
     setTicks(ts);
   }, [data, scale]);
 
+  let titleProps = pick(rest, "title_");
+  let labelProps = pick(rest, "label_");
+  let gridlineProps = pick(rest, "gridline_");
+  let axisProps = pick(rest, "axis_");
+
   return (
     <>
       <g id={`axis_${id}`}>
-        <polyline points={border.join(" ")} stroke="black" />
+        <polyline points={border.join(" ")} stroke="black" {...axisProps} />
         {ticks.map(({ text, ...attrs }) => {
           return (
-            <text dominantBaseline="Hanging" {...attrs}>
+            <text dominantBaseline="Hanging" {...attrs} {...labelProps}>
               {text}
             </text>
           );
         })}
-        {gridLines &&
+        {gridlines &&
           ticks.map(({ x, y, ...rest }) => {
             let a: Point[] =
               direction === "h"
@@ -126,9 +130,17 @@ let Axis: FC<props> = ({
                     [x, y],
                     [dimensions[0], y],
                   ];
-            return <polyline points={a.join(" ")} stroke="lightgrey" />;
+            return (
+              <polyline
+                points={a.join(" ")}
+                stroke="lightgrey"
+                {...gridlineProps}
+              />
+            );
           })}
-        <text {...titlePosition}>{title}</text>
+        <text {...titlePosition} {...titleProps}>
+          {title}
+        </text>
       </g>
       <Scale direction={direction} id={id} {...rest} />
     </>

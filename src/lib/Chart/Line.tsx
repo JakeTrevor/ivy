@@ -20,7 +20,7 @@ let Line: FC<lineProps> = ({
   ...rest
 }) => {
   let chartContext = useContext(ctx);
-  let { axes, register, dimensions, chartArea } = chartContext;
+  let { scales: scales, register, dimensions, chartArea } = chartContext;
 
   useEffect(() => {
     if (!series) {
@@ -34,8 +34,8 @@ let Line: FC<lineProps> = ({
     register["dataset"](series, { axes: [x, y], data: points });
   }, []);
 
-  let scaleX = axes[x] ? axes[x][0] : identity;
-  let scaleY = axes[y] ? axes[y][0] : identity;
+  let scaleX = scales[x] || identity;
+  let scaleY = scales[y] || identity;
 
   let baseline = `translate(${dimensions[0] - chartArea[0]} 0)`;
 

@@ -13,8 +13,16 @@ function App() {
     <div>
       <h1>Example:</h1>
       <Chart width={400} height={200} axisSize={30}>
-        <Axis direction="h" auto="lin" title=" " tickStep={2} />
-        <Axis direction="v" auto="lin" title=" " tickStep={40} gridLines />
+        <Axis
+          direction="h"
+          auto="lin"
+          title=""
+          tickStep={2}
+          label_transform=""
+          gridlines
+          gridline_stroke="pink"
+        />
+        <Axis direction="v" auto="lin" title=" " tickStep={40} gridlines />
         <Line points={quadratic} series="quadratic" />
         <Line points={linear} series="linear" stroke="blue" />
       </Chart>

@@ -14,12 +14,12 @@ let Chart: FC<props> = ({
   height,
   ...rest
 }) => {
-  let [axes, setAxes] = useState<ChartAxes>({});
+  let [axes, setAxes] = useState<{ [id: string]: Scale }>({});
 
-  let [data, setData] = useState<Data>({});
+  let [data, setData] = useState<{ [id: string]: Dataset }>({});
 
   let register = {
-    axis: (id: string, scale: [Scale, Scale]) => {
+    scale: (id: string, scale: Scale) => {
       setAxes((old) => {
         return {
           ...old,
@@ -45,7 +45,13 @@ let Chart: FC<props> = ({
 
   return (
     <chartContext.Provider
-      value={{ dimensions: [width, height], chartArea, axes, data, register }}
+      value={{
+        dimensions: [width, height],
+        chartArea,
+        scales: axes,
+        data,
+        register,
+      }}
     >
       <Plot {...rest} width={width} height={height} />
     </chartContext.Provider>
