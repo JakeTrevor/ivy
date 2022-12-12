@@ -19,8 +19,7 @@ let Line: FC<lineProps> = ({
   stroke = "black",
   ...rest
 }) => {
-  let chartContext = useContext(ctx);
-  let { scales: scales, register, dimensions, chartArea } = chartContext;
+  let { scales, register, dimensions, chartArea } = useContext(ctx);
 
   useEffect(() => {
     if (!series) {
@@ -41,6 +40,7 @@ let Line: FC<lineProps> = ({
 
   return (
     <polyline
+      id={`series:${series}`}
       transform={baseline}
       points={points.map((p) => [scaleX(p[0]), scaleY(p[1])]).join(" ")}
       {...rest}

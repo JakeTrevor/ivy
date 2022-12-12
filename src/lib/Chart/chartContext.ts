@@ -15,9 +15,9 @@ export let chartContext = createContext<context>({
   dimensions: [0, 0],
   chartArea: [0, 0],
   scales: {},
+  data: {},
   register: {
     scale: (id: string, scale: Scale) => id,
     dataset: (id: string, data: Dataset) => id,
   },
-  data: {},
 });

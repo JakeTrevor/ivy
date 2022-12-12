@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { getDataset } from "../common/getDataset";
 import identity from "../common/identity";
 import pick from "../common/pick";

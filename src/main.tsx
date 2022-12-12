@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import Axis from "./lib/Chart/Axis";
 import Chart from "./lib/Chart/Chart";
 import Line from "./lib/Chart/Line";
+import Scatter from "./lib/Chart/Scatter";
 
 function App() {
   let quadratic: Point[] = [...Array(20).keys()].map((e, i) => [i, i ** 2]);
@@ -16,13 +17,19 @@ function App() {
         <Axis
           direction="h"
           auto="lin"
-          title=""
           tickStep={2}
-          label_transform=""
           gridlines
           gridline_stroke="pink"
         />
-        <Axis direction="v" auto="lin" title=" " tickStep={40} gridlines />
+        <Axis
+          direction="v"
+          auto="lin"
+          title_transform="translate(0, -65)"
+          title="y&darr;"
+          tickStep={40}
+          gridlines
+        />
+        <Scatter points={quadratic} series="quadratic" />
         <Line points={quadratic} series="quadratic" />
         <Line points={linear} series="linear" stroke="blue" />
       </Chart>
