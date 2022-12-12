@@ -1,10 +1,10 @@
-export function getDataset(
+function useDataset(
   data: { [id: string]: Dataset },
-  id: string,
+  scaleID: string,
   direction: string
 ) {
   return Object.values(data)
-    .filter((e) => e.axes.includes(id))
+    .filter((e) => e.axes.includes(scaleID))
     .flatMap((e) => {
       if (!Array.isArray(e.data[0])) return e.data as number[];
 
@@ -14,3 +14,5 @@ export function getDataset(
       return arr.map(get);
     });
 }
+
+export default useDataset;

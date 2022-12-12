@@ -1,6 +1,6 @@
 import identity from "./identity";
 
-export function makeLin(
+function makeLin(
   data: number[],
   axisSize: number,
   reverse = false,
@@ -44,6 +44,8 @@ export function makeLin(
   return [scale, inverse];
 }
 
+export default makeLin;
+
 //an example:
 let data = [10, 20, 30, 40, 50];
 let [scale, inverse] = makeLin(data, 10);
@@ -57,48 +59,3 @@ let [scale, inverse] = makeLin(data, 10);
 
 // the reverse flag is necessary as SVG coordinates have down = increasing y
 // so for a normal graph with 0,0 in the bottom left, you want the lowest data value to have the highest y coordinate.
-
-export function makeLog(
-  data: number[],
-  axisSize: number,
-  reverse = false,
-  paddingPercent = 10,
-  debug = false
-): [Scale, Scale] {
-  if (data.length === 0) {
-    return [identity, identity];
-  }
-
-  let max = Math.max(...data);
-  let min = Math.min(...data);
-  let range = max - min;
-
-  let extra = range * (paddingPercent / 100);
-
-  let bottom = min - extra;
-  let top = max + extra;
-
-  if (reverse) {
-    [top, bottom] = [bottom, top];
-  }
-
-  let m = 1 / Math.log(top - bottom);
-  let c = -m * Math.log(bottom);
-
-  let scale: Scale = (x) => axisSize * (m * Math.log10(x) + c);
-  let inverse: Scale = (y) => 10 ^ ((y / axisSize - c) / m);
-
-  if (debug) {
-    console.info(
-      `scale for:`,
-      data,
-      `range: ${range}, top: ${top}, bottom: ${bottom}`,
-      `reverse: ${reverse}`,
-      `y= ${m}*log x + ${c}`,
-      `data to:`,
-      data.map((e) => scale(e))
-    );
-  }
-
-  return [scale, inverse];
-}
