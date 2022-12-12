@@ -1,37 +1,37 @@
 import { FC, useContext, useEffect } from "react";
 import { chartContext as ctx } from "./chartContext";
-import Cross from "../../icons/Cross";
-import identity from "../common/identity";
+import { identity } from "../../hooks";
 
-interface props {
+// unfortunate ts voodoo
+interface lineProps extends Omit<React.SVGProps<SVGPolylineElement>, "points"> {
   points: Point[];
   series: string;
-  Component?: any;
-
   x?: string;
   y?: string;
 }
 
-let Scatter: FC<props> = ({
+let Line: FC<lineProps> = ({
   points,
   series,
   x = "x",
   y = "y",
-  Component = Cross,
+  fill = "none",
+  stroke = "black",
+  ...rest
 }) => {
-  let { scales: scales, register, dimensions, chartArea } = useContext(ctx);
+  let { scales, register, dimensions, chartArea } = useContext(ctx);
 
   useEffect(() => {
     if (!series) {
       console.error(
-        "Unset series name for Scatter with data:",
+        "Unset series name for Line with data:",
         points,
         "All series must have a name."
       );
       return;
     }
     register["dataset"](series, { axes: [x, y], data: points });
-  }, [points]);
+  }, []);
 
   let scaleX = scales[x] || identity;
   let scaleY = scales[y] || identity;
@@ -39,12 +39,15 @@ let Scatter: FC<props> = ({
   let baseline = `translate(${dimensions[0] - chartArea[0]} 0)`;
 
   return (
-    <g id={`series:${series}`}>
-      {points.map((p, i) => (
-        <Component x={scaleX(p[0])} y={scaleY(p[1])} transform={baseline} />
-      ))}
-    </g>
+    <polyline
+      id={`series:${series}`}
+      transform={baseline}
+      points={points.map((p) => [scaleX(p[0]), scaleY(p[1])]).join(" ")}
+      {...rest}
+      fill={fill}
+      stroke={stroke}
+    ></polyline>
   );
 };
 
-export default Scatter;
+export default Line;

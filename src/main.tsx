@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Axis from "./lib/Chart/Axis";
-import Chart from "./lib/Chart/Chart";
-import Line from "./lib/Chart/Line";
-import Scatter from "./lib/Chart/Scatter";
+import Axis from "./lib/components/Chart/Axis/Axis";
+import Chart from "./lib/components/Chart/Chart";
+import Line from "./lib/components/Chart/Line";
+import Scatter from "./lib/components/Chart/Scatter";
 
 function App() {
   let quadratic: Point[] = [...Array(20).keys()].map((e, i) => [i, i ** 2]);
@@ -14,16 +14,9 @@ function App() {
     <div>
       <h1>Example:</h1>
       <Chart width={400} height={200} axisSize={30}>
-        <Axis
-          direction="h"
-          auto="lin"
-          tickStep={2}
-          gridlines
-          gridline_stroke="pink"
-        />
+        <Axis direction="h" tickStep={2} gridlines gridline_stroke="pink" />
         <Axis
           direction="v"
-          auto="lin"
           title_transform="translate(0, -65)"
           title="y&darr;"
           tickStep={40}

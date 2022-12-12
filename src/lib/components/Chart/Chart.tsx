@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import Plot, { PlotProps } from "../common/Plot";
+import Plot, { PlotProps } from "../Plot";
 import { chartContext } from "./chartContext";
 
 interface props extends PlotProps {

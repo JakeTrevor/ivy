@@ -7,7 +7,7 @@ interface ScaleLabel {
   x: number;
   y: number;
   text: string;
-  "transform-origin": string;
-  "text-anchor": "start" | "end";
 }
 [];
+
+type Direction = "h" | "v";
