@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Axis from "./lib/components/Chart/Axis/Axis";
 import Chart from "./lib/components/Chart/Chart";
-import Line from "./lib/components/Chart/Line";
-import Scatter from "./lib/components/Chart/Scatter";
-import Bar from "./lib/components/Chart/Bar";
+import Line from "./lib/components/Chart/plots/Line";
+import Scatter from "./lib/components/Chart/plots/Scatter";
+import Bar from "./lib/components/Chart/plots/Bar";
 
 function App() {
   let quadratic: Point[] = [...Array(20).keys()].map((e, i) => [i, i ** 2]);

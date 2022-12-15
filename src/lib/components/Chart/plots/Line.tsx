@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect } from "react";
-import { chartContext as ctx } from "./chartContext";
-import { identity } from "../../hooks";
+import { chartContext as ctx } from "../chartContext";
+import { identity } from "../../../hooks";
 
 // unfortunate ts voodoo
 interface lineProps extends Omit<React.SVGProps<SVGPolylineElement>, "points"> {

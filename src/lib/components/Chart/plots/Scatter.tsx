@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect } from "react";
-import { chartContext as ctx } from "./chartContext";
-import { identity } from "../../hooks";
-import Cross from "../../icons/Cross";
+import { chartContext as ctx } from "../chartContext";
+import { identity } from "../../../hooks";
+import Cross from "../../../icons/Cross";
 
 interface props {
   points: Point[];

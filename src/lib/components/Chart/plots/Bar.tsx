@@ -1,6 +1,6 @@
 import { FC, useContext, useEffect } from "react";
-import { identity } from "../../hooks";
-import { chartContext as ctx } from "./chartContext";
+import { identity } from "../../../hooks";
+import { chartContext as ctx } from "../chartContext";
 
 interface props extends Omit<React.SVGAttributes<SVGRectElement>, "points"> {
   points: Point[];
@@ -33,8 +33,6 @@ let Bar: FC<props> = ({
     }
     register["dataset"](series, { axes: [x, y], data: points });
   }, []);
-
-  let margins = [dimensions[0] - chartArea[0], dimensions[1] - chartArea[1]];
 
   let scaleX = scales[x] || identity;
   let scaleY = scales[y] || identity;

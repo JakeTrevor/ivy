@@ -20,7 +20,7 @@
     "body": [
       "import type { FC } from \"react\"",
       "",
-      "let ${1:component}:FC = () => {\n\t${0:return <>content</>}\n}",
+      "let ${1:$TM_FILENAME_BASE }:FC = () => {\n\t${0:return <>content</>}\n}",
       "",
       "export default $1;"
     ],
