@@ -19,7 +19,7 @@ let Scatter: FC<props> = ({
   y = "y",
   Component = Cross,
 }) => {
-  let { scales: scales, register, dimensions, chartArea } = useContext(ctx);
+  let { scales, register, dimensions, chartArea } = useContext(ctx);
 
   useEffect(() => {
     if (!series) {
