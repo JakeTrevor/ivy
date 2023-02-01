@@ -8,8 +8,8 @@ import Rose from "./lib/components/Rose";
 import classnames from "./lib/functions/classnames";
 
 function App() {
-  let data = [4, 3, 2, 1, 5, 4];
-  let cnames = [
+  let data = [4, 3, 2, 1, 4];
+  let cNames = [
     "fill-pink-100 stroke-none",
     "fill-pink-300 stroke-none",
     "fill-pink-500 stroke-none",
@@ -23,7 +23,6 @@ function App() {
     "c",
     "d",
     "e",
-    "f",
   ];
 
   let x = (
@@ -38,7 +37,7 @@ function App() {
     >
       <RadarPlot data={data} className="fill-pink-200/50 stroke-pink-400" />
       <RadarPlot
-        data={[3, 1, 4, 1, 2, 5]}
+        data={[3, 1, 4, 1, 5]}
         className="fill-orange-200/50 stroke-orange-400"
         dots
         markerProps={{ className: "fill-orange-400" }}
@@ -52,8 +51,8 @@ function App() {
       <h2>[{data.join(", ")}]</h2>
       <p style={{ display: "flex" }}>
         <div className="w-3/4">{x}</div>
-        <Pie data={data} sliceProps={classnames(cnames)} />
-        <Rose data={data} sliceProps={classnames(cnames)} />
+        <Pie data={data} sliceProps={classnames(cNames)} />
+        <Rose data={data} sliceProps={classnames(cNames)} />
         <Column
           data={data}
           rectangleProps={[
