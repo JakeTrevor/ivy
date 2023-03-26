@@ -1,5 +1,6 @@
 import type { FC } from "react";
-import normScale from "../scales/normScale";
+import { numerical_series } from "~/schemas";
+import normScale from "~/scales/normScale";
 import PieSlice from "./PieSlice";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
@@ -10,6 +11,7 @@ interface props extends React.SVGAttributes<SVGSVGElement> {
 const size = 100;
 
 let Pie: FC<props> = ({ data, sliceProps, ...rest }) => {
+  numerical_series.parse(data);
   let scaleFn = normScale(data);
 
   let origin = size / 2;
@@ -32,6 +34,7 @@ let Pie: FC<props> = ({ data, sliceProps, ...rest }) => {
 
         return (
           <PieSlice
+            key={i}
             origin={[origin, origin]}
             radius={radius}
             startAngle={startAngle}

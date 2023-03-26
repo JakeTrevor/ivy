@@ -1,16 +1,25 @@
 import type { FC } from "react";
-import propScale from "../scales/propScale";
+import propScale from "~/scales/propScale";
+import {
+  NumericalSeries,
+  numerical_series,
+  ZeroPoint,
+  zero_point,
+} from "~/schemas";
 import PieSlice from "./PieSlice";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
-  data: number[];
-  zeroPoint?: number;
+  data: NumericalSeries;
+  zeroPoint?: ZeroPoint;
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
 
 const size = 100;
 
 let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
+  numerical_series.parse(data);
+  zero_point.parse(zeroPoint);
+
   let scaleFn = propScale([...data, zeroPoint]);
   let origin = size / 2;
   let maxRadius = origin * 0.9;
@@ -33,6 +42,7 @@ let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
 
         return (
           <PieSlice
+            key={i}
             origin={[origin, origin]}
             radius={radius}
             startAngle={startAngle}

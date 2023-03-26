@@ -1,8 +1,9 @@
 import type { FC } from "react";
-import normScale from "../scales/normScale";
+import normScale from "~/scales/normScale";
+import { NumericalSeries, numerical_series } from "~/schemas";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
-  data: number[];
+  data: NumericalSeries;
   width?: number;
   rectangleProps?: React.SVGAttributes<SVGRectElement>[];
 }
@@ -10,6 +11,7 @@ interface props extends React.SVGAttributes<SVGSVGElement> {
 const size = 100;
 
 let Column: FC<props> = ({ data, width = size, rectangleProps, ...rest }) => {
+  numerical_series.parse(data);
   let scaleFn = normScale(data);
 
   return (
@@ -30,6 +32,7 @@ let Column: FC<props> = ({ data, width = size, rectangleProps, ...rest }) => {
 
         return (
           <rect
+            key={i}
             x={0}
             width={width}
             y={y}

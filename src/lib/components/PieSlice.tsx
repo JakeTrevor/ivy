@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { unit_direction } from "../functions/unit_direction";
+import { unit_direction } from "~/functions/unit_direction";
 
 interface props {
   origin: [number, number];
