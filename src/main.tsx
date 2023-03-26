@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Column from "./lib/components/Column";
-import Pie from "./lib/components/Pie";
-import RadarAxes from "./lib/components/radar/Axes";
-import RadarPlot from "./lib/components/radar/Plot";
-import Rose from "./lib/components/Rose";
-import classnames from "./lib/functions/classnames";
+import Column from "~/components/Column";
+import Pie from "~/components/Pie";
+import Radar from "~/components/radar";
+import Rose from "~/components/Rose";
+import classnames from "~/functions/classnames";
 
 function App() {
   let data = [4, 3, 2, 1, 4];
+  let data2 = [3, 1, 4, 1, 5];
   let cNames = [
     "fill-pink-100 stroke-none",
     "fill-pink-300 stroke-none",
@@ -17,39 +17,39 @@ function App() {
     "fill-pink-900 stroke-none",
   ];
 
-  let labels = [
-    <button onClick={() => alert("yo mama")}>&alpha;</button>,
-    "b",
-    "c",
-    "d",
-    "e",
-  ];
+  let labels = ["&alpha;", "b", "c", "d", "e"];
 
   let x = (
-    <RadarAxes
-      min={0}
-      max={5}
-      spokeLabels={labels}
-      axisProps={{ className: "stroke-gray-400 stroke-[0.5]" }}
-      gridlines
-      gridProps={{ className: "stroke-gray-400/90 stroke-[0.5]" }}
-      overflow="visible"
-    >
-      <RadarPlot data={data} className="fill-pink-200/50 stroke-pink-400" />
-      <RadarPlot
-        data={[3, 1, 4, 1, 5]}
-        className="fill-orange-200/50 stroke-orange-400"
-        dots
-        markerProps={{ className: "fill-orange-400" }}
+    <Radar min={0} max={5} numSpokes={5}>
+      <Radar.Spokes className="stroke-grey-400 stroke-[0.5]" />
+      <Radar.Scale />
+      <Radar.Gridlines className="stroke-grey-400/90 stroke-[0.5] hover:scale-105 transition-all duration-500" />
+      <Radar.Labels labels={labels} />
+      <Radar.plot.Line
+        data={data}
+        className="fill-pink-200/50 stroke-pink-400"
       />
-    </RadarAxes>
+      <Radar.plot.Line
+        data={data2}
+        className="fill-orange-200/50 stroke-orange-400"
+      />
+      <Radar.plot.Dot
+        data={data2}
+        className="fill-orange-400 hover:fill-orange-700 hover:shadow-md hover:scale-150 transition-all duration-500"
+        onClick={(e) =>
+          alert(
+            `${e.currentTarget.dataset.idx}, ${e.currentTarget.dataset.value}`
+          )
+        }
+      />
+    </Radar>
   );
 
   return (
     <div style={{ fontFamily: "roboto" }}>
       <h1>Example:</h1>
       <h2>[{data.join(", ")}]</h2>
-      <p style={{ display: "flex" }}>
+      <div className="flex flex-col">
         <div className="w-3/4">{x}</div>
         <Pie data={data} sliceProps={classnames(cNames)} />
         <Rose data={data} sliceProps={classnames(cNames)} />
@@ -63,7 +63,7 @@ function App() {
             { fill: "orange", stroke: "none" },
           ]}
         />
-      </p>
+      </div>
 
       {/* {renderToString(x)} */}
     </div>
