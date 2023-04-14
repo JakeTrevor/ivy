@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import normScale from "~/scales/normScale";
-import { NumericalSeries, numerical_series } from "~/schemas";
+import { NumericalSeries, numerical_series } from "~/common_schemas";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: NumericalSeries;

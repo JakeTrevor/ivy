@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { numerical_series } from "~/schemas";
+import { numerical_series } from "~/common_schemas";
 import normScale from "~/scales/normScale";
-import PieSlice from "./PieSlice";
+import PieSlice from "../PieSlice";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: number[];
@@ -34,6 +34,8 @@ let Pie: FC<props> = ({ data, sliceProps, ...rest }) => {
 
         return (
           <PieSlice
+            data-idx={i}
+            data-val={e}
             key={i}
             origin={[origin, origin]}
             radius={radius}

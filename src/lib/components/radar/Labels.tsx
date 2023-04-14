@@ -1,5 +1,5 @@
 import { FC, SVGProps, useContext } from "react";
-import { z } from "zod";
+import { text_series } from "~/common_schemas";
 import { unit_direction } from "~/functions/unit_direction";
 import RadarContext from "./context";
 
@@ -10,7 +10,9 @@ interface props extends SVGProps<SVGTextElement> {
 let Labels: FC<props> = ({ labels, ...rest }) => {
   let { numSpokes, origin, radius } = useContext(RadarContext);
 
-  labels = z.array(z.coerce.string()).length(numSpokes).parse(labels);
+  labels = text_series
+    .length(numSpokes, `Labels array is wrong size; should be ${numSpokes}`)
+    .parse(labels);
 
   let inter_spoke_angle = (2 * Math.PI) / numSpokes;
 

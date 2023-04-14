@@ -5,11 +5,12 @@ import {
   numerical_series,
   ZeroPoint,
   zero_point,
-} from "~/schemas";
+} from "~/common_schemas";
 import PieSlice from "./PieSlice";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: NumericalSeries;
+  /** The value that maps to a slice radius of 0 */
   zeroPoint?: ZeroPoint;
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
@@ -42,6 +43,8 @@ let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
 
         return (
           <PieSlice
+            data-idx={i}
+            data-value={e}
             key={i}
             origin={[origin, origin]}
             radius={radius}
