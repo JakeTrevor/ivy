@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import propScale from "~/scales/propScale";
+import { propScale } from "~/utils";
+
 import RadarContext from "./context";
 import Gridlines from "./Gridlines";
 import Labels from "./Labels";

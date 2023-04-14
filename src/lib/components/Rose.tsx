@@ -1,12 +1,12 @@
 import type { FC } from "react";
-import propScale from "~/scales/propScale";
 import {
   NumericalSeries,
   numerical_series,
   ZeroPoint,
   zero_point,
-} from "~/common_schemas";
+} from "~/utils/common_schemas";
 import PieSlice from "./PieSlice";
+import { propScale } from "~/utils";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: NumericalSeries;

@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Column from "~/components/Column";
-import Pie from "~/components/Pie";
+import Pie from "~/components/pie";
 import Radar from "~/components/radar";
 import Rose from "~/components/Rose";
-import classnames from "~/functions/classnames";
+import { classnames } from "~/utils";
 
 function App() {
   let data = [4, 3, 2, 1, 4];

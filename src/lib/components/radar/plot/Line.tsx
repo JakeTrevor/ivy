@@ -1,5 +1,5 @@
 import { FC, SVGProps, useContext } from "react";
-import { unit_direction } from "~/functions/unit_direction";
+import { unit_direction } from "~/utils";
 import RadarContext from "../context";
 import schema from "./schema";
 

@@ -1,6 +1,6 @@
 import { FC, SVGProps, useContext } from "react";
-import { text_series } from "~/common_schemas";
-import { unit_direction } from "~/functions/unit_direction";
+import { text_series } from "~/utils/common_schemas";
+import { unit_direction } from "~/utils";
 import RadarContext from "./context";
 
 interface props extends SVGProps<SVGTextElement> {
