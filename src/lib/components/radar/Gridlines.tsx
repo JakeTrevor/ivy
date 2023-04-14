@@ -16,9 +16,9 @@ let Gridlines: FC<props> = ({ ...rest }) => {
         let gridRadius = scaleFn(val) * radius;
         return (
           <circle
-            key={i}
             data-idx={i}
             data-value={val}
+            key={i}
             cx={origin[0]}
             cy={origin[1]}
             r={gridRadius}

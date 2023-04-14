@@ -23,11 +23,11 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
           .map((e, i) => origin[i] + e);
         return (
           <text
+            data-idx={i}
+            data-value={val}
             key={i}
             x={point[0]}
             y={point[1]}
-            data-idx={i}
-            data-value={val}
             {...rest}
           >
             {val}
