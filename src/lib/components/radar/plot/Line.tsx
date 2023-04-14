@@ -2,13 +2,14 @@ import { FC, SVGProps, useContext } from "react";
 import { unit_direction } from "~/utils";
 import RadarContext from "../context";
 import schema from "./schema";
+import { ORIGIN } from "~/CONSTANTS";
 
 interface props extends SVGProps<SVGPolygonElement> {
   data: number[];
 }
 
 let Line: FC<props> = ({ data, ...rest }) => {
-  let { scaleFn, radius, origin, numSpokes } = useContext(RadarContext);
+  let { scaleFn, radius, numSpokes } = useContext(RadarContext);
 
   schema().parse(data);
 
@@ -18,7 +19,7 @@ let Line: FC<props> = ({ data, ...rest }) => {
     let scaleFactor = scaleFn(e) * radius;
     let angle = i * inter_spoke_angle;
     let direction = unit_direction(angle);
-    return direction.map((e) => e * scaleFactor).map((e, i) => e + origin[i]);
+    return direction.map((e) => e * scaleFactor).map((e) => e + ORIGIN);
   });
 
   return (

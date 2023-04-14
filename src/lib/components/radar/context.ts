@@ -2,7 +2,6 @@ import { createContext } from "react";
 
 interface context {
   radius: number;
-  origin: [number, number];
   min: number;
   max: number;
   numSpokes: number;
@@ -12,7 +11,6 @@ interface context {
 
 let RadarContext = createContext<context>({
   radius: 45,
-  origin: [50, 50],
   min: 0,
   max: 5,
   numSpokes: 5,

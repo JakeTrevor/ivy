@@ -2,13 +2,14 @@ import { FC, SVGProps, useContext } from "react";
 import { text_series } from "~/utils/common_schemas";
 import { unit_direction } from "~/utils";
 import RadarContext from "./context";
+import { ORIGIN } from "~/CONSTANTS";
 
 interface props extends SVGProps<SVGTextElement> {
   labels: string[];
 }
 
 let Labels: FC<props> = ({ labels, ...rest }) => {
-  let { numSpokes, origin, radius } = useContext(RadarContext);
+  let { numSpokes, radius } = useContext(RadarContext);
 
   labels = text_series
     .length(numSpokes, `Labels array is wrong size; should be ${numSpokes}`)
@@ -22,7 +23,7 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
         let angle = i * inter_spoke_angle;
         let point = unit_direction(angle)
           .map((e) => e * (radius * 1.05))
-          .map((e, i) => origin[i] + e);
+          .map((e) => e + ORIGIN);
         return (
           <text
             data-idx={i}

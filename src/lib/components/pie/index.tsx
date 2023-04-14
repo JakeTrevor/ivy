@@ -3,6 +3,7 @@ import { numerical_series } from "~/utils/common_schemas";
 import { normScale } from "~/utils";
 import PieSlice from "../PieSlice";
 import PieContext from "./context";
+import { ORIGIN, SIZE } from "~/CONSTANTS";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: number[];
@@ -10,14 +11,11 @@ interface props extends React.SVGAttributes<SVGSVGElement> {
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
 
-const size = 100;
-
 let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
   numerical_series.parse(data);
   let scaleFn = normScale(data);
 
-  let origin = size / 2;
-  let radius = (size / 2) * 0.9;
+  let radius = (SIZE / 2) * 0.9;
 
   return (
     <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" {...rest}>
@@ -40,7 +38,7 @@ let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
               data-idx={i}
               data-val={e}
               key={i}
-              origin={[origin, origin]}
+              origin={[ORIGIN, ORIGIN]}
               radius={radius}
               startAngle={startAngle}
               sliceAngle={sliceAngle}

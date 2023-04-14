@@ -5,6 +5,9 @@ import {
   ZeroPoint,
   zero_point,
 } from "~/utils/common_schemas";
+
+import { ORIGIN } from "~/CONSTANTS";
+
 import PieSlice from "./PieSlice";
 import { propScale } from "~/utils";
 
@@ -15,15 +18,12 @@ interface props extends React.SVGAttributes<SVGSVGElement> {
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
 
-const size = 100;
-
 let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
   numerical_series.parse(data);
   zero_point.parse(zeroPoint);
 
   let scaleFn = propScale([...data, zeroPoint]);
-  let origin = size / 2;
-  let maxRadius = origin * 0.9;
+  let maxRadius = ORIGIN * 0.9;
 
   let spokes = data.length;
   let inter_spoke_angle = (2 * Math.PI) / spokes;
@@ -46,7 +46,7 @@ let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
             data-idx={i}
             data-value={e}
             key={i}
-            origin={[origin, origin]}
+            origin={[ORIGIN, ORIGIN]}
             radius={radius}
             startAngle={startAngle}
             sliceAngle={inter_spoke_angle}

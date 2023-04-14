@@ -8,6 +8,7 @@ import Dot from "./plot/Dot";
 import Line from "./plot/Line";
 import Scale from "./Scale";
 import Spokes from "./Spokes";
+import { ORIGIN } from "~/CONSTANTS";
 
 interface props extends React.SVGProps<SVGSVGElement> {
   min: number;
@@ -28,8 +29,7 @@ const Radar = ({
   children,
   ...rest
 }: props) => {
-  let origin = size / 2;
-  let radius = origin * 0.9; //fill 90%
+  let radius = ORIGIN * 0.9; //fill 90%
   let scaleFn = propScale([min, max]);
 
   return (
@@ -42,7 +42,6 @@ const Radar = ({
     >
       <RadarContext.Provider
         value={{
-          origin: [origin, origin],
           radius,
           scaleFn,
           min,

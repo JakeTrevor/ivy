@@ -1,11 +1,11 @@
 import { FC, SVGProps, useContext } from "react";
 import RadarContext from "./context";
+import { ORIGIN } from "~/CONSTANTS";
 
 interface props extends SVGProps<SVGCircleElement> {}
 
 let Gridlines: FC<props> = ({ ...rest }) => {
-  let { scaleFn, max, min, radius, origin, stepSize } =
-    useContext(RadarContext);
+  let { scaleFn, max, min, radius, stepSize } = useContext(RadarContext);
 
   let numTicks = Math.floor((max - min) / stepSize);
 
@@ -19,10 +19,10 @@ let Gridlines: FC<props> = ({ ...rest }) => {
             data-idx={i}
             data-value={val}
             key={i}
-            cx={origin[0]}
-            cy={origin[1]}
+            cx={ORIGIN}
+            cy={ORIGIN}
             r={gridRadius}
-            transform-origin={`${origin[0]} ${origin[1]}`}
+            transform-origin={`${ORIGIN} ${ORIGIN}`}
             fill="none"
             stroke="grey"
             {...rest}
