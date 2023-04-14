@@ -1,16 +1,18 @@
-import type { FC } from "react";
-import { numerical_series } from "~/common_schemas";
-import normScale from "~/scales/normScale";
+import type { FC, ReactNode } from "react";
+import { numerical_series } from "~/utils/common_schemas";
+import { normScale } from "~/utils";
 import PieSlice from "../PieSlice";
+import PieContext from "./context";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: number[];
+  children?: ReactNode;
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
 
 const size = 100;
 
-let Pie: FC<props> = ({ data, sliceProps, ...rest }) => {
+let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
   numerical_series.parse(data);
   let scaleFn = normScale(data);
 
@@ -19,32 +21,41 @@ let Pie: FC<props> = ({ data, sliceProps, ...rest }) => {
 
   return (
     <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" {...rest}>
-      {data.map((e, i, a) => {
-        let prevSum = a.slice(0, i).reduce((a, b) => a + b, 0);
-        let startAngle = scaleFn(prevSum) * 2 * Math.PI;
+      <g id="slices">
+        {data.map((e, i, a) => {
+          let prevSum = a.slice(0, i).reduce((a, b) => a + b, 0);
+          let startAngle = scaleFn(prevSum) * 2 * Math.PI;
 
-        let sliceAngle = scaleFn(e) * 2 * Math.PI;
+          let sliceAngle = scaleFn(e) * 2 * Math.PI;
 
-        let props = {};
-        if (sliceProps) {
-          if (sliceProps.length > i) {
-            props = sliceProps[i];
+          let props = {};
+          if (sliceProps) {
+            if (sliceProps.length > i) {
+              props = sliceProps[i];
+            }
           }
-        }
 
-        return (
-          <PieSlice
-            data-idx={i}
-            data-val={e}
-            key={i}
-            origin={[origin, origin]}
-            radius={radius}
-            startAngle={startAngle}
-            sliceAngle={sliceAngle}
-            props={props}
-          />
-        );
-      })}
+          return (
+            <PieSlice
+              data-idx={i}
+              data-val={e}
+              key={i}
+              origin={[origin, origin]}
+              radius={radius}
+              startAngle={startAngle}
+              sliceAngle={sliceAngle}
+              props={props}
+            />
+          );
+        })}
+      </g>
+      <PieContext.Provider
+        value={{
+          data: data,
+        }}
+      >
+        {children}
+      </PieContext.Provider>
     </svg>
   );
 };
