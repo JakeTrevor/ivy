@@ -3,7 +3,7 @@ import RadarContext from "../context";
 import { ORIGIN } from "~/CONSTANTS";
 import { unit_direction } from "~/utils";
 
-interface props extends SVGProps<SVGPolygonElement> {}
+export interface props extends SVGProps<SVGPolygonElement> {}
 
 let Polygon: FC<props> = ({ ...rest }) => {
   let { scaleFn, max, min, radius, stepSize, numSpokes } =

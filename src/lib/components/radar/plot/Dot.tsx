@@ -4,7 +4,7 @@ import RadarContext from "../context";
 import schema from "./schema";
 import { ORIGIN } from "~/CONSTANTS";
 
-interface props extends SVGProps<SVGCircleElement> {
+export interface props extends SVGProps<SVGCircleElement> {
   data: number[];
 }
 

@@ -2,7 +2,7 @@ import { FC, SVGProps, useContext } from "react";
 import RadarContext from "./context";
 import { ORIGIN } from "~/CONSTANTS";
 
-interface props extends SVGProps<SVGTextElement> {}
+export interface props extends SVGProps<SVGTextElement> {}
 
 let Scale: FC<props> = ({ ...rest }) => {
   let { scaleFn, max, min, radius, stepSize } = useContext(RadarContext);

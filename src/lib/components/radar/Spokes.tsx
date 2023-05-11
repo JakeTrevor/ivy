@@ -3,7 +3,7 @@ import { unit_direction } from "~/utils";
 import RadarContext from "./context";
 import { ORIGIN } from "~/CONSTANTS";
 
-interface props extends React.SVGProps<SVGLineElement> {}
+export interface props extends React.SVGProps<SVGLineElement> {}
 
 let Spokes: FC<props> = ({ ...rest }) => {
   let { numSpokes, radius } = useContext(RadarContext);

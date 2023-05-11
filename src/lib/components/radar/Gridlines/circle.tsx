@@ -2,7 +2,7 @@ import { FC, SVGProps, useContext } from "react";
 import RadarContext from "../context";
 import { ORIGIN } from "~/CONSTANTS";
 
-interface props extends SVGProps<SVGCircleElement> {}
+export interface props extends SVGProps<SVGCircleElement> {}
 
 let Circle: FC<props> = ({ ...rest }) => {
   let { scaleFn, max, min, radius, stepSize } = useContext(RadarContext);

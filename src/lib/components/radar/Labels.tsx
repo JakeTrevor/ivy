@@ -4,7 +4,7 @@ import { unit_direction } from "~/utils";
 import RadarContext from "./context";
 import { ORIGIN } from "~/CONSTANTS";
 
-interface props extends SVGProps<SVGTextElement> {
+export interface props extends SVGProps<SVGTextElement> {
   labels: string[];
 }
 
