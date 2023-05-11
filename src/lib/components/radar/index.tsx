@@ -2,13 +2,14 @@ import { ReactNode } from "react";
 import { propScale } from "~/utils";
 
 import RadarContext from "./context";
-import Gridlines from "./Gridlines";
+import Circle from "./Gridlines/circle";
 import Labels from "./Labels";
 import Dot from "./plot/Dot";
 import Line from "./plot/Line";
 import Scale from "./Scale";
 import Spokes from "./Spokes";
 import { ORIGIN } from "~/CONSTANTS";
+import Polygon from "./Gridlines/polygon";
 
 interface props extends React.SVGProps<SVGSVGElement> {
   min: number;
@@ -18,8 +19,6 @@ interface props extends React.SVGProps<SVGSVGElement> {
 
   children?: ReactNode;
 }
-
-const size = 100;
 
 const Radar = ({
   min,
@@ -56,14 +55,11 @@ const Radar = ({
   );
 };
 
-Radar.Gridlines = Gridlines;
 Radar.Labels = Labels;
 Radar.Scale = Scale;
 Radar.Spokes = Spokes;
 
-Radar.plot = {
-  Line: Line,
-  Dot: Dot,
-};
+Radar.Gridlines = { Circle, Polygon };
+Radar.plot = { Line, Dot };
 
 export default Radar;

@@ -31,6 +31,9 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
             key={i}
             x={point[0]}
             y={point[1]}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize={7}
             {...rest}
           >
             {val}

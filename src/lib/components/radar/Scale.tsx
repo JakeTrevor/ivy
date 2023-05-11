@@ -22,8 +22,8 @@ let Scale: FC<props> = ({ ...rest }) => {
             key={i}
             x={ORIGIN}
             y={ORIGIN - gridRadius}
-            fontSize="50%"
-            textAnchor="middle"
+            fontSize={5}
+            textAnchor="end"
             dominantBaseline="text-after-edge"
             {...rest}
           >

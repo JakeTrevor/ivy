@@ -7,8 +7,8 @@ import Rose from "~/components/Rose";
 import { classnames } from "~/utils";
 
 function App() {
-  let data = [4, 3, 2, 1, 4];
-  let data2 = [3, 1, 4, 1, 5];
+  let data = [5, 4, 3, 2, 1];
+  let data2 = [5, 1, 5, 1, 1];
   let cNames = [
     "fill-pink-100 stroke-none",
     "fill-pink-300 stroke-none",
@@ -17,13 +17,13 @@ function App() {
     "fill-pink-900 stroke-none",
   ];
 
-  let labels = ["&alpha;", "b", "c", "d", "e"];
+  let labels = ["a", "b", "c", "d", "e"];
 
   let x = (
     <Radar min={0} max={5} numSpokes={5}>
       <Radar.Spokes className="stroke-grey-400 stroke-[0.5]" />
       <Radar.Scale />
-      <Radar.Gridlines className="stroke-grey-400/90 stroke-[0.5] hover:scale-105 transition-all duration-500" />
+      <Radar.Gridlines.Circle className="stroke-grey-400/90 stroke-[0.5] hover:scale-105 transition-all duration-500" />
       <Radar.Labels labels={labels} />
       <Radar.plot.Line
         data={data}
@@ -50,7 +50,7 @@ function App() {
       <h1>Example:</h1>
       <h2>[{data.join(", ")}]</h2>
       <div className="flex flex-col">
-        <div className="w-3/4">{x}</div>
+        <div className="w-1/4">{x}</div>
         <Pie data={data} sliceProps={classnames(cNames)} />
         <Rose data={data} sliceProps={classnames(cNames)} />
         <Column
