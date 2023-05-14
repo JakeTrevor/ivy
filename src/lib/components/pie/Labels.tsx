@@ -10,7 +10,7 @@ interface props {
 
 let Labels: FC<props> = ({ labels }) => {
   let { data } = useContext(PieContext);
-  labels = text_series.length(data.length).parse({ labels });
+  labels = text_series.length(data.length).parse(labels);
 
   let scaleFn = normScale(data);
 

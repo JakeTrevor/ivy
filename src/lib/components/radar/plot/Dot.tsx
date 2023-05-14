@@ -1,7 +1,7 @@
 import { FC, SVGProps, useContext } from "react";
 import { unit_direction } from "~/utils";
 import RadarContext from "../context";
-import schema from "./schema";
+import plotSchema from "./schema";
 import { ORIGIN } from "~/CONSTANTS";
 
 export interface props extends SVGProps<SVGCircleElement> {
@@ -11,7 +11,7 @@ export interface props extends SVGProps<SVGCircleElement> {
 let Dot: FC<props> = ({ data, ...rest }) => {
   let { scaleFn, radius, numSpokes } = useContext(RadarContext);
 
-  schema().parse(data);
+  plotSchema().parse(data);
 
   let inter_spoke_angle = (2 * Math.PI) / numSpokes;
 
@@ -26,7 +26,7 @@ let Dot: FC<props> = ({ data, ...rest }) => {
     <g id="dot-plot">
       {path.map((e, i) => (
         <circle
-          data-idx={i}
+          data-index={i}
           data-value={data[i]}
           key={i}
           cx={e[0]}

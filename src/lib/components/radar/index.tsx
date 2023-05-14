@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 import { propScale } from "~/utils";
 
-import RadarContext from "./context";
-import Circle, { type props as circleProps } from "./Gridlines/circle";
-import Labels, { type props as labelProps } from "./Labels";
-import Dot, { type props as dotProps } from "./plot/Dot";
-import Line, { type props as lineProps } from "./plot/Line";
-import Scale, { type props as scaleProps } from "./Scale";
-import Spokes, { type props as spokeProps } from "./Spokes";
 import { ORIGIN } from "~/CONSTANTS";
-import Polygon, { type props as polygonProps } from "./Gridlines/polygon";
+import Circle from "./Gridlines/circle";
+import Polygon from "./Gridlines/polygon";
+import Labels from "./Labels";
+import Scale from "./Scale";
+import Spokes from "./Spokes";
+import RadarContext from "./context";
+import Dot from "./plot/Dot";
+import Line from "./plot/Line";
 
 interface props extends React.SVGProps<SVGSVGElement> {
   min: number;

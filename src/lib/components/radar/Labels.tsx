@@ -1,8 +1,9 @@
 import { FC, SVGProps, useContext } from "react";
-import { text_series } from "~/utils/common_schemas";
-import { unit_direction } from "~/utils";
-import RadarContext from "./context";
+
 import { ORIGIN } from "~/CONSTANTS";
+import { unit_direction } from "~/utils";
+import { text_series } from "~/utils/common_schemas";
+import RadarContext from "./context";
 
 export interface props extends SVGProps<SVGTextElement> {
   labels: string[];
@@ -26,7 +27,7 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
           .map((e) => e + ORIGIN);
         return (
           <text
-            data-idx={i}
+            data-index={i}
             data-value={val}
             key={i}
             x={point[0]}
@@ -48,5 +49,5 @@ export default Labels;
 
 // note that you can use access the element itself via onclick with
 // onClick={(e) => e.currentTarget}
-// Together with the idx attribute, this gives you quite a lot of flexibility. e.g.:
-// onClick={(e) => alert(e.currentTarget.dataset.idx)}
+// Together with the index attribute, this gives you quite a lot of flexibility. e.g.:
+// onClick={(e) => alert(e.currentTarget.dataset.index)}

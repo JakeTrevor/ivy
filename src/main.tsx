@@ -38,7 +38,7 @@ function App() {
         className="fill-orange-400 hover:fill-orange-700 hover:shadow-md hover:scale-150 transition-all duration-500"
         onClick={(e) =>
           alert(
-            `${e.currentTarget.dataset.idx}, ${e.currentTarget.dataset.value}`
+            `${e.currentTarget.dataset.index}, ${e.currentTarget.dataset.value}`
           )
         }
       />

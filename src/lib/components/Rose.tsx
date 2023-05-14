@@ -43,7 +43,7 @@ let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
 
         return (
           <PieSlice
-            data-idx={i}
+            data-index={i}
             data-value={e}
             key={i}
             origin={[ORIGIN, ORIGIN]}

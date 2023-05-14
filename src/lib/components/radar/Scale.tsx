@@ -17,7 +17,7 @@ let Scale: FC<props> = ({ ...rest }) => {
 
         return (
           <text
-            data-idx={i}
+            data-index={i}
             data-value={val}
             key={i}
             x={ORIGIN}

@@ -35,7 +35,7 @@ let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
 
           return (
             <PieSlice
-              data-idx={i}
+              data-index={i}
               data-val={e}
               key={i}
               origin={[ORIGIN, ORIGIN]}

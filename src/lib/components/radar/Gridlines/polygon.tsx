@@ -26,7 +26,7 @@ let Polygon: FC<props> = ({ ...rest }) => {
 
         return (
           <polygon
-            data-idx={i}
+            data-index={i}
             data-value={val}
             points={path.join(" ")}
             key={i}

@@ -16,7 +16,7 @@ let Circle: FC<props> = ({ ...rest }) => {
         let gridRadius = scaleFn(val) * radius;
         return (
           <circle
-            data-idx={i}
+            data-index={i}
             data-value={val}
             key={i}
             cx={ORIGIN}

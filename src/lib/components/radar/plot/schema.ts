@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { z } from "zod";
 import RadarContext from "../context";
 
-const schema = () => {
+const plotSchema = () => {
   let { max, min, numSpokes } = useContext(RadarContext);
   return z
     .array(
@@ -13,4 +13,4 @@ const schema = () => {
     )
     .length(numSpokes, `Data array is wrong size; should be ${numSpokes}`);
 };
-export default schema;
+export default plotSchema;

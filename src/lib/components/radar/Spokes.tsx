@@ -19,7 +19,7 @@ let Spokes: FC<props> = ({ ...rest }) => {
           .map((e) => e + ORIGIN);
         return (
           <line
-            data-idx={i}
+            data-index={i}
             key={i}
             x1={ORIGIN}
             y1={ORIGIN}

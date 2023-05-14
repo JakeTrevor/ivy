@@ -29,8 +29,8 @@ These 6 problems are the ones I set out to address, and while some are quite vai
 - declarative
 - comprehensive
 - customisable
-- server/pre-render friendly
+- SSR friendly
 
-Thus, the goal of ivy is high-level abstraction with low-level control.
+So the goal of ivy is high-level abstraction with low-level control.
 
 For example, you probably don't need to be worrying about how you will convert a data point into a coordinate on a graph; but you very much might care about weather we display that data point as a dot or as part of a line, what colour it ends up being, and what happens when you click on it.

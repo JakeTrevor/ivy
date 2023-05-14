@@ -1,7 +1,7 @@
 import { FC, SVGProps, useContext } from "react";
 import { unit_direction } from "~/utils";
 import RadarContext from "../context";
-import schema from "./schema";
+import plotSchema from "./schema";
 import { ORIGIN } from "~/CONSTANTS";
 
 export interface props extends SVGProps<SVGPolygonElement> {
@@ -11,7 +11,7 @@ export interface props extends SVGProps<SVGPolygonElement> {
 let Line: FC<props> = ({ data, ...rest }) => {
   let { scaleFn, radius, numSpokes } = useContext(RadarContext);
 
-  schema().parse(data);
+  plotSchema().parse(data);
 
   let inter_spoke_angle = (2 * Math.PI) / numSpokes;
 
