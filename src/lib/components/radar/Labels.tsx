@@ -7,9 +7,10 @@ import RadarContext from "./context";
 
 export interface props extends SVGProps<SVGTextElement> {
   labels: string[];
+  itemProps: SVGProps<SVGTextElement>[];
 }
 
-let Labels: FC<props> = ({ labels, ...rest }) => {
+let Labels: FC<props> = ({ labels, itemProps, ...rest }) => {
   let { numSpokes, radius } = useContext(RadarContext);
 
   labels = text_series
@@ -25,6 +26,7 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
         let point = unit_direction(angle)
           .map((e) => e * (radius * 1.05))
           .map((e) => e + ORIGIN);
+
         return (
           <text
             data-index={i}
@@ -36,6 +38,7 @@ let Labels: FC<props> = ({ labels, ...rest }) => {
             dominantBaseline="middle"
             fontSize={7}
             {...rest}
+            {...itemProps[i]}
           >
             {val}
           </text>
