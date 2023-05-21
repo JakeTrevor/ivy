@@ -5,7 +5,7 @@ import { ORIGIN } from "~/CONSTANTS";
 import Circle from "./Gridlines/circle";
 import Polygon from "./Gridlines/polygon";
 import Labels from "./Labels";
-import Scale from "./Scale";
+import GridLabels from "./GridLabels";
 import Spokes from "./Spokes";
 import RadarContext from "./context";
 import Dot from "./plot/Dot";
@@ -56,7 +56,7 @@ const Radar = ({
 };
 
 Radar.Labels = Labels;
-Radar.Scale = Scale;
+Radar.GridLabels = GridLabels;
 Radar.Spokes = Spokes;
 
 Radar.Gridlines = { Circle, Polygon };

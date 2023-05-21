@@ -2,9 +2,11 @@ import { FC, SVGProps, useContext } from "react";
 import RadarContext from "./context";
 import { ORIGIN } from "~/CONSTANTS";
 
-export interface props extends SVGProps<SVGTextElement> {}
+export interface props extends SVGProps<SVGTextElement> {
+  itemProps?: SVGProps<SVGTextElement>[];
+}
 
-let Scale: FC<props> = ({ ...rest }) => {
+let GridLabels: FC<props> = ({ itemProps = [], ...rest }) => {
   let { scaleFn, max, min, radius, stepSize } = useContext(RadarContext);
 
   let numTicks = Math.floor((max - min) / stepSize);
@@ -26,6 +28,7 @@ let Scale: FC<props> = ({ ...rest }) => {
             textAnchor="end"
             dominantBaseline="text-after-edge"
             {...rest}
+            {...itemProps[i]}
           >
             {val}
           </text>
@@ -35,4 +38,4 @@ let Scale: FC<props> = ({ ...rest }) => {
   );
 };
 
-export default Scale;
+export default GridLabels;
