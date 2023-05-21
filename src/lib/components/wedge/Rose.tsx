@@ -8,7 +8,7 @@ import {
 
 import { ORIGIN } from "~/CONSTANTS";
 
-import PieSlice from "./PieSlice";
+import PieSlice from "./Wedge";
 import { propScale } from "~/utils";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {

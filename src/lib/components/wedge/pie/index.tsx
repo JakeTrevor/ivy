@@ -1,9 +1,10 @@
-import type { FC, ReactNode } from "react";
-import { numerical_series } from "~/utils/common_schemas";
-import { normScale } from "~/utils";
-import PieSlice from "../PieSlice";
-import PieContext from "./context";
+import type { ReactNode } from "react";
 import { ORIGIN, SIZE } from "~/CONSTANTS";
+import { normScale } from "~/utils";
+import { numerical_series } from "~/utils/common_schemas";
+import PieSlice from "../Wedge";
+import Labels from "./Labels";
+import PieContext from "./context";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
   data: number[];
@@ -11,7 +12,7 @@ interface props extends React.SVGAttributes<SVGSVGElement> {
   sliceProps?: React.SVGProps<SVGPathElement>[];
 }
 
-let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
+const Pie = ({ data, sliceProps, children, ...rest }: props) => {
   numerical_series.parse(data);
   let scaleFn = normScale(data);
 
@@ -57,5 +58,7 @@ let Pie: FC<props> = ({ data, sliceProps, children, ...rest }) => {
     </svg>
   );
 };
+
+Pie.Labels = Labels;
 
 export default Pie;
