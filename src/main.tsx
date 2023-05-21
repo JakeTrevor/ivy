@@ -24,7 +24,7 @@ function App() {
       <Radar.Spokes className="stroke-grey-400 stroke-[0.5]" />
       <Radar.Scale />
       <Radar.Gridlines.Circle className="stroke-grey-400/90 stroke-[0.5] hover:scale-105 transition-all duration-500" />
-      <Radar.Labels labels={labels} />
+      <Radar.Labels labels={labels} itemProps={classnames(["translate-x-1"])} />
       <Radar.plot.Line
         data={data}
         className="fill-pink-200/50 stroke-pink-400"
