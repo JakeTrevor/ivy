@@ -1,3 +1,8 @@
+# ⚠️ WARNING: ⚠️
+
+This package is still under construction!
+That's why there is 0 documentation; you are of course free to use it, but be aware that the API may change in future versions
+
 # ivy
 
 Ivy is an Information Visualisation library for react.
