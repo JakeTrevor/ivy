@@ -7,10 +7,10 @@ import RadarContext from "./context";
 
 export interface props extends SVGProps<SVGTextElement> {
   labels: string[];
-  itemProps: SVGProps<SVGTextElement>[];
+  itemProps?: SVGProps<SVGTextElement>[];
 }
 
-let Labels: FC<props> = ({ labels, itemProps, ...rest }) => {
+let Labels: FC<props> = ({ labels, itemProps = [], ...rest }) => {
   let { numSpokes, radius } = useContext(RadarContext);
 
   labels = text_series
@@ -50,6 +50,7 @@ let Labels: FC<props> = ({ labels, itemProps, ...rest }) => {
 
 export default Labels;
 
+// TODO: put into documentation
 // note that you can use access the element itself via onclick with
 // onClick={(e) => e.currentTarget}
 // Together with the index attribute, this gives you quite a lot of flexibility. e.g.:
