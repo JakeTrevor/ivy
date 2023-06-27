@@ -55,7 +55,9 @@ function App() {
       <div className="flex flex-col items-center">
         <div className="w-1/4">{x}</div>
         <div className="w-1/4">
-          <Pie data={data} sliceProps={classnames(cNames)} />
+          <Pie data={data} sliceProps={classnames(cNames)}>
+            <Pie.Labels.Category labels={["a", "b", "c", "d", "e"]} />
+          </Pie>
         </div>
         <div className="w-1/4">
           <Rose data={data} sliceProps={classnames(cNames)} />

@@ -50,7 +50,7 @@ let Rose: FC<props> = ({ data, zeroPoint = 0, sliceProps, ...rest }) => {
             radius={radius}
             startAngle={startAngle}
             sliceAngle={inter_spoke_angle}
-            props={props}
+            {...props}
           />
         );
       })}

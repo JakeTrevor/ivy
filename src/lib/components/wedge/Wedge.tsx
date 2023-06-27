@@ -1,12 +1,11 @@
-import type { FC } from "react";
+import type { FC, SVGProps } from "react";
 import { unit_direction } from "~/utils";
 
-interface props {
+interface props extends SVGProps<SVGPathElement> {
   origin: [number, number];
   radius: number;
   startAngle: number;
   sliceAngle: number;
-  props: React.SVGProps<SVGPathElement>;
 }
 
 let PieSlice: FC<props> = ({
@@ -14,7 +13,7 @@ let PieSlice: FC<props> = ({
   radius,
   startAngle,
   sliceAngle,
-  props,
+  ...rest
 }) => {
   let largeArc = sliceAngle > Math.PI ? 1 : 0;
 
@@ -31,7 +30,7 @@ let PieSlice: FC<props> = ({
     `L ${start.join(" ")} ` +
     `A ${radius} ${radius} 0 ${largeArc} 1 ${end.join(" ")} Z`;
 
-  return <path d={path} fill="turquoise" stroke="black" {...props} />;
+  return <path d={path} fill="turquoise" stroke="black" {...rest} />;
 };
 
 export default PieSlice;

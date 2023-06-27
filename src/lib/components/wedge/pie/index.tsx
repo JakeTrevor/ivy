@@ -3,7 +3,7 @@ import { ORIGIN, SIZE } from "~/CONSTANTS";
 import { normScale } from "~/utils";
 import { numerical_series } from "~/utils/common_schemas";
 import PieSlice from "../Wedge";
-import Labels from "./Labels";
+import CategoryLabels from "./Labels/Category";
 import PieContext from "./context";
 
 interface props extends React.SVGAttributes<SVGSVGElement> {
@@ -43,7 +43,7 @@ const Pie = ({ data, sliceProps, children, ...rest }: props) => {
               radius={radius}
               startAngle={startAngle}
               sliceAngle={sliceAngle}
-              props={props}
+              {...props}
             />
           );
         })}
@@ -59,6 +59,6 @@ const Pie = ({ data, sliceProps, children, ...rest }: props) => {
   );
 };
 
-Pie.Labels = Labels;
+Pie.Labels = { Category: CategoryLabels };
 
 export default Pie;
